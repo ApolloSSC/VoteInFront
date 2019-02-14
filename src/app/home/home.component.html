@@ -1,0 +1,79 @@
+<div class="section bg-dark-blue">
+  <div class="container center">
+    <share-buttons [theme]="'material-dark'"
+                   [include]="['facebook','twitter','google','linkedin','pinterest','reddit','tumblr','whatsapp','telegram','email']"
+                   [showText]="true"
+                   [size]="-2"></share-buttons>
+    <h3 class="header center-align" translate="Home.Title"></h3>
+    <p class="grey-text text-darken-3 lighten-3 center-align">
+      <a class="waves-effect waves-light btn btn-large bg-primary-blue scale-transition" routerLink="/poll/create" translate="Home.CreateVote"></a>
+    </p>
+  </div>
+</div>
+<div class="section bg-primary-blue z-depth-1">
+  <div class="container row">
+    <div class="col s12">
+      <h2 translate="Home.Subtitle"></h2>
+      <p [innerHTML]="'Home.SubtitleAnswer' | translate"></p>
+    </div>
+  </div>
+</div>
+<div class="section presentation-types">
+  <div class="container">
+    <div class="row">
+      <div class="col s12 center-align">
+        <h3 translate="Home.Subtitle2"></h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12">
+        <div class="card horizontal">
+          <div class="card-image">
+            <img src="/assets/images/{{'ImgPath' | translate}}/jugement-majo.png">
+          </div>
+          <div class="card-stacked">
+            <div class="card-content">
+              <span class="card-title" translate="Home.MajorityTitle"></span>
+              <span translate="Home.MajorityText"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12">
+        <div class="card horizontal">
+          <div class="card-image">
+            <img src="/assets/images/{{'ImgPath' | translate}}/vote-alternatif.png">
+          </div>
+          <div class="card-stacked">
+            <div class="card-content">
+              <span class="card-title" translate="Home.AlternativeTitle"></span>
+              <span translate="Home.AlternativeText"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section">
+  <div class="container">
+    <div class="row">
+      <div class="video-container">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/ZoGH7d51bvc?rel=0&cc_load_policy=1" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col s12 center-align">
+        <h2 translate="Home.SecurityTitle"></h2>
+        <p translate="Home.SecurityText"></p>
+        <img class="max100" src="assets/images/{{'ImgPath' | translate}}/CryptoVoteIn.png">
+      </div>
+    </div>
+  </div>
+</div>

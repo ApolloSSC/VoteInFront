@@ -1,0 +1,48 @@
+@import "./variables.sass"
+
+.brand-logo
+    margin-left: 20px
+    height: 64px
+    display: flex
+    img
+        width: 50px
+    span
+        height: 100%
+        margin-left: 10px
+        display: inline-block
+        vertical-align: middle
+
+.side-nav
+    .logo
+        text-align: center
+        img
+            width: 50px
+
+.by-apollo
+    position: absolute
+    left: 200px
+    top: 0px
+    color: #FFF
+    font-size: 1rem
+    height: 64px
+    img
+        vertical-align: middle
+        width: 100px
+
+@media only screen and (max-width: 800px)
+    .by-apollo
+        display: none
+
+@media only screen and (max-width: 600px)
+    .brand-logo
+        height: 56px
+        img
+            width: 43px
+
+@media only screen and (min-width: 600px)
+    .brand-logo
+        left: 0%
+        -webkit-transform: translateX(0%)
+        transform: translateX(0%)
+
+   

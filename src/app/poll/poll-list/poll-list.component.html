@@ -1,0 +1,21 @@
+<article class="container">
+    <div class="row center">
+        <div class="progress" *ngIf="pollList == null">
+            <div class="indeterminate left"></div>
+        </div>
+        <h3 *ngIf="pollList" translate="PollList.Ongoing"></h3>
+        <div *ngIf="currentPolls?.length == 0" translate="PollList.OngoingNone"></div>
+        <ul *ngIf="currentPolls?.length != 0" materialize="collapsible" class="collapsible popout" data-collapsible="accordion">
+            <li app-poll-detail *ngFor="let poll of currentPolls" 
+                [votingProcess]="poll" 
+                (onDelete)="removeCurrent(poll)"
+                (onCloture)="closeCurrent(poll)"></li>
+        </ul>
+
+        <h3 *ngIf="pollList" translate="PollList.Closed"></h3>
+        <div *ngIf="pastPolls?.length == 0" translate="PollList.ClosedNone"></div>
+        <ul *ngIf="pastPolls?.length != 0" materialize="collapsible" class="collapsible popout" data-collapsible="accordion">
+            <li app-poll-detail *ngFor="let poll of pastPolls" [votingProcess]="poll" (onDelete)="removeOld(poll)"></li>
+        </ul>
+    </div>
+</article>

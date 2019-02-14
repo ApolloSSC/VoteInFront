@@ -1,0 +1,140 @@
+
+<div class="collapsible-header valign-wrapper truncate" [ngClass]="{'single': isSingle}">
+    <div class="title">
+        {{votingProcess?.Name}} <span *ngIf="votingProcess?.VotingProcessMode?.Code == 'votingProcess-majoritaire'">({{votingProcess?.IdPreviousVotingProcess ? translate.instant('Shared.Second') : translate.instant('Shared.First') }}) {{translate.instant('Shared.Round')}})</span>
+    </div>
+    <div class="hide-on-med-and-down">
+        {{votingProcess?.VotingProcessMode?.Name}} 
+    </div>
+    <div class="header-vote-participants hide-on-small-only" [ngClass]="getCompleteClass()">
+        <i class="material-icons">mail_outline</i>
+        {{votingProcess.NbVotes?votingProcess.NbVotes:'0'}}
+        <ng-container *ngIf="!votingProcess.Public">
+            / {{votingProcess.Voter ? votingProcess.Voter.length : "0"}}
+        </ng-container>
+    </div>
+</div>
+<div class="collapsible-body" [ngClass]="{'single': isSingle}">
+    <div class="flex-wrapper">
+        <div class="left-body">
+            <div class="row hide-on-large-only">
+                <div class="col s12">
+                    {{votingProcess?.VotingProcessMode?.Name}} 
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <span *ngIf="isClosed">
+                        {{votingProcess.Description}}
+                    </span>
+                    <div class="input-field" *ngIf="!isClosed">
+                        <textarea id="description-textarea" class="materialize-textarea"
+                        placeholder=" "
+                        (change)="save()"
+                        [(ngModel)]="votingProcess.Description" name="description-textarea"></textarea>
+                        <label for="description-textarea" translate="Shared.PollDescription"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="row" *ngIf="!isCreated">
+                <div class="col">
+                    <i class="material-icons body-icon">date_range</i>
+                    <span translate="PollList.OpenAt"></span> {{votingProcess.OpeningDate | date:'dd/MM/yyyy'}}
+                    <span *ngIf="isClosed">
+                        <span translate="PollList.ClosedAt"></span> {{votingProcess.ClosingDate | date:'dd/MM/yyyy'}}
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <i class="material-icons body-icon">group</i>
+                    <span class="chip" *ngFor="let proposition of votingProcess.options">
+                        <i class="circle" *ngIf="proposition.Color" [style.background]="proposition.Color"></i>
+                        {{proposition.Name}}
+                        <span class="actions" *ngIf="!isClosed">
+                            <app-proposition-modal [proposition]="proposition" (onValidate)="save($event)"></app-proposition-modal>
+                            <!-- TODO: gestion propre de la suppression d'option -->
+                            <!-- <i class="material-icons" (click)="tryDeleteProposition(proposition)">delete</i> -->
+                        </span>
+                    </span>
+                </div>
+            </div>
+            <div class="footer-body">
+              <ng-container *ngIf="isOpened">
+                <a class="waves-effect waves-teal btn-flat" [routerLink]="votingProcess.Guid" *ngIf="!isSingle">
+                    <i class="material-icons left">mail_outline</i>
+                    <span translate="PollList.GoToVote"></span>>
+                </a>
+                <button *ngIf="!isClosed" class="waves-effect waves-teal btn" (click)="openModalCloture()" [disabled]="votingProcess.NbVotes==0">
+                    <i class="material-icons left">check</i>
+                    <span translate="PollList.ClosingElections"></span>
+                </button>
+              </ng-container>
+                
+              <a class="waves-effect waves-teal btn-flat" 
+                *ngIf="isClosed"
+                [routerLink]="['/poll', votingProcess.Guid,'result']">
+                  <i class="material-icons left">pie_chart_outlined</i>
+                  <span translate="PollList.GoToResults"></span>
+              </a>
+              <a class="waves-effect waves-teal btn-flat" 
+                  (click)="openModalSuppression()">
+                  <i class="material-icons left">delete</i>
+                  <span translate="PollList.Delete"></span>
+              </a>
+            </div>
+        </div>
+        <div class="right-body" [ngClass]="getCompleteClass()">
+            <div *ngIf="votingProcess?.Public">
+                <i class="material-icons">public</i>
+                <span translate="Shared.PublicPoll"></span>
+            </div>
+            <div *ngIf="!votingProcess?.Public">
+                <i class="material-icons">lock</i>
+                <span translate="Shared.PrivatePoll"></span>
+            </div>
+            <div *ngIf="!isCreated">
+              {{votingProcess.NbVotes?votingProcess.NbVotes:0}} <span translate="Shared.Voter"></span><span *ngIf="votingProcess.NbVotes > 1">s</span>
+            </div>
+            <div class="qrcode" *ngIf="votingProcess?.ClosingDate==null && votingProcess.Public">
+                <qrcode [qrdata]="basePath + '/poll/' + votingProcess.Guid" [colordark]="'#343434'" [size]="140" [level]="'L'"></qrcode>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Suppression -->
+<div class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalSuppressionActions">
+    <div class="modal-content">
+      <h4 translate="VoteDelete.Title"></h4>
+      <p translate="VoteDelete.Text"></p>
+    </div>
+    <div class="modal-footer">
+      <a (click)="closeModalSuppression()" class=" modal-action modal-close waves-effect waves-green btn-flat" translate="Shared.Cancel"></a>
+      <a (click)="delete()" class=" modal-action modal-close waves-effect waves-green btn-flat" translate="Shared.Confirm"></a>
+    </div>
+</div>
+
+<!-- Modal Cloture -->
+<div class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalClotureActions">
+    <div class="modal-content">
+        <h4 translate="VoteClosing.Title"></h4>
+        <p translate="VoteClosing.Text"></p>
+    </div>
+    <div class="modal-footer">
+        <a (click)="closeModalCloture()" class=" modal-action modal-close waves-effect waves-green btn-flat" translate="Shared.Cancel"></a>
+        <a (click)="cloturer()" class=" modal-action modal-close waves-effect waves-green btn-flat" translate="Shared.Confirm"></a>
+    </div>
+</div>
+
+<!-- Modal Suppression Proposition-->
+<div class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalSuppressionPropositionActions">
+    <div class="modal-content">
+        <h4 translate="OptionDelete.Title"></h4>
+        <p translate="OptionDelete.Text"></p>
+    </div>
+    <div class="modal-footer">
+        <a (click)="closeModalSuppressionProposition()" class=" modal-action modal-close waves-effect waves-green btn-flat" translate="Shared.Cancel"></a>
+        <a (click)="deleteProposition()" class=" modal-action modal-close waves-effect waves-green btn-flat" translate="Shared.Confirm"></a>
+    </div>
+</div>

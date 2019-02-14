@@ -1,0 +1,15 @@
+.chart-container > div{
+    display: flex;
+    justify-content: center;
+    .advanced-pie-legend-wrapper{
+        width:auto!important;
+        .advanced-pie-legend{
+            width:auto!important;
+        }
+    }
+
+}
+
+.chart-wrapper{
+    margin-top: 2em;
+}

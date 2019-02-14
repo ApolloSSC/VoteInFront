@@ -1,0 +1,8 @@
+<i [(colorPicker)]="couleur"
+  class="material-icons"
+  [cpPosition]="'top'"
+  [style.color]="couleur?couleur:'#FFFFFF'"
+  [cpPresetColors]="defaultColors"
+  cpAlphaChannel="disabled"
+  cpPositionOffset="25%">fiber_manual_record</i>
+<i *ngIf="resetable && couleur" (click)="couleur=null" class="material-icons">close</i>

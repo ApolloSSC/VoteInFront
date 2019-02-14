@@ -1,0 +1,39 @@
+<div class="card">
+    <div class="card-content">
+        <div class="row">
+            <div class="col s12">
+            </div>
+            <div class="col s12 l8 offset-l2">
+                <h3 translate="PollResult.DetailedResult"></h3>
+                <p translate="PollResult.AlternativeRule"></p>
+                <table class="highlight centered">
+                    <thead>
+                        <tr>
+                            <th translate="Shared.Stage"></th>
+                            <th *ngFor="let option of Resultat.Options">{{option.Name}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let etape of Resultat.Stages; let i = index">
+                            <td>
+                                <p *ngIf="Resultat.Winner || i < Resultat.Stages.length - 1">{{i+1}}</p>
+                                <i *ngIf="!Resultat.Winner && i == Resultat.Stages.length - 1" class="material-icons">report_problem</i>
+                            </td>
+                            <td *ngFor="let score of etape.Scores">
+                                <div style="display:flex; justify-content: center">
+                                    <div [ngClass]="{'elimination': score.Option.Id == etape.RemovedOption?.Id,
+                                            'winning': score.Option.Id == Resultat.Winner?.Id && i == Resultat.Stages.length - 1}">
+                                    {{score.Votes}}
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+  
+  
+  

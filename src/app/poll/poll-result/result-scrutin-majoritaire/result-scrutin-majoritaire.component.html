@@ -1,0 +1,38 @@
+<div class="card">
+  <div class="card-content">
+    <ng-container *ngIf="!Resultat.Winner && Resultat.IsValidResult">
+      <h4 translate="Shared.FirstRoundResult"></h4>
+      <h5>
+        <b>{{Resultat.IndividualResults[0].Option.Name}}</b> 
+        <span translate="Shared.And"></span> 
+        <b>{{Resultat.IndividualResults[1].Option.Name}}</b>
+        <span translate="PollResult.SelectedForSecondRound"></span>
+      </h5>
+    </ng-container>
+    <div class="row">
+      <div class="col s8 offset-s2 chart-wrapper">
+        <ngx-charts-advanced-pie-chart
+          class="chart-container"
+          [scheme]="'picnic'"
+          [results]="ngxResult"
+          [animations]="true"
+          [label]="'Votes'">
+        </ngx-charts-advanced-pie-chart>
+      </div>
+        
+      <div 
+        *ngIf="ngxResultPrev"
+        class="col s8 offset-s2 chart-wrapper">
+        <h5 translate="Shared.FirstRoundResult"></h5>
+        <ngx-charts-advanced-pie-chart
+          class="chart-container"
+          [scheme]="'picnic'"
+          [results]="ngxResultPrev"
+          [animations]="true"
+          [label]="'Votes'">
+        </ngx-charts-advanced-pie-chart>
+      </div>
+    </div>
+  </div>
+</div>
+

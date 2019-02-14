@@ -1,0 +1,44 @@
+@import "../../variables.sass"
+.collection
+    text-align: left
+    overflow: visible
+    p
+        white-space: nowrap
+        overflow: hidden
+        &.description
+            opacity: 0.5
+    .title
+        font-weight: bold
+    .collection-item
+        position: relative
+
+.actions
+    float: right
+    position: absolute
+    right: 5px
+    top: 5px
+    padding-left: 5px
+    background: #FFF
+    a
+        color: #AAA
+        margin: 3px
+        &:hover
+            color: currentColor
+.card
+    margin: 0.4rem 0 0.4rem 0
+    .card-title
+        margin: 0
+    .card-content
+        padding: 5px 10px
+        input
+            margin: 0 0 5px 0
+.row
+    margin-top: 0px
+    margin-bottom: 0px
+\:host /deep/ .collection-btn
+    color: #AAA
+    &:hover
+        color: currentColor
+
+textarea 
+    height: 4em

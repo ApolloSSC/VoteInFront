@@ -1,0 +1,52 @@
+<div class="row title-zone" *ngIf="votingProcess">
+    <div class="col s6" *ngIf="propositions.length>0">
+        <h3 class="align-center" translate="Vote.ProposalsToSorted"></h3>
+    </div>
+    <div class="col" [ngClass]="{'s6': propositions.length > 0, 's12': propositions.length == 0}">
+        <h3 class="align-center" translate="Vote.YourRanking"></h3>
+    </div>
+</div>
+<div class="row dnd-zone" *ngIf="votingProcess" #autoscroll >
+  <div class="col s6" [hidden]="propositions.length == 0">
+    <div class="card bg-primary-blue">
+      <div dragula='left' class="card-content" [attr.content]="'Vote.MoveProposals' | translate" [(dragulaModel)]='propositions' [hidden]="propositions.length == 0">
+        <div *ngFor="let proposition of propositions" class="proposition unsorted">
+          <div class="circle" [style.background]="proposition.Color" *ngIf="proposition.Color"></div>
+          <div class="content">{{proposition.Name}}</div>
+        </div>
+      </div>
+    </div>
+   
+  </div>
+  <div class="col" [ngClass]="{'s6': propositions.length > 0, 's12': propositions.length == 0}">
+    <div class="card bg-primary-blue" [ngClass]="{'green white-text': propositions.length == 0}">
+      <div dragula='left' class="card-content" [attr.content]="'Vote.MoveProposals' | translate" [ngClass]="{'empty': ranking.length == 0}" [(dragulaModel)]='ranking'>
+        <div *ngFor="let proposition of ranking; let i = index" class="proposition">
+          <div class="ranking">
+            {{(i+1)}}
+          </div>
+          <div class="circle" [style.background]="proposition.Color" *ngIf="proposition.Color">
+          </div>
+          <div class="content">
+            {{proposition.Name}}
+          </div>
+        </div>
+      </div>
+      <div class="card-action" *ngIf="votingProcess && propositions.length > 0">
+        {{ranking.length}}/{{votingProcess.options.length}} <span translate="Vote.ClassifiedProposals"></span>
+      </div>
+      <div class="card-action green white-text" *ngIf="propositions.length == 0">
+        <i class="material-icons" style="vertical-align: sub;">done</i>
+        <span translate="Vote.Sorted"></span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row btn-zone">
+  <div class="col s12 center">
+      <button [disabled]="!isVoteOk()" 
+        (click)="vote()" 
+        class="btn-large waves-effect waves-light btn-valider bg-primary-blue" 
+        name="action" translate="Shared.Submit"></button>
+  </div>
+</div>

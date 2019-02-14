@@ -1,0 +1,39 @@
+<section class="collapsible-container center">
+    <ul materialize="collapsible" class="collapsible popout no-border" data-collapsible="accordion">
+      <li *ngFor="let proposition of votingProcess.options" [ngClass]="{'selected': isSelected(proposition)}"> 
+        <div class="collapsible-header valign-wrapper">
+            <div class="header-container">
+              <div class="row valign-wrapper">
+                  <div class="col s6 m6 l8">
+                    <div class="row valign-wrapper">
+                      <div class="col">
+                        <i class="circle" *ngIf="proposition.Color" [style.background]="proposition.Color"></i>
+                        <div class="title">
+                            {{ proposition.Name }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col s6 m6 l4">
+                    <button (click)="$event.stopPropagation(); selectCandidate(proposition)" 
+                      class='dropdown-button btn btn-vote'>
+                        <ng-container *ngIf='!isSelected(proposition)'>Voter</ng-container>
+                        <ng-container *ngIf='isSelected(proposition)'>
+                          <i class="material-icons">check</i>
+                        </ng-container>
+                    </button>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="collapsible-body no-border left-align">
+          <p>{{ proposition.Description?proposition.Description:'Pas de description' }}</p>
+        </div>
+      </li>
+    </ul>  
+    <button [disabled]="isVote()" 
+            (click)="vote()" 
+            class="btn-large waves-effect waves-light btn-valider bg-primary-blue" 
+            name="action" translate="Shared.Submit"></button>
+</section>  
+

@@ -1,0 +1,115 @@
+@import "../../variables.sass"
+
+.s12 a
+    margin: 3px
+.collapsible-header
+    padding: 0px
+    display: flex
+    heigth: 35px
+    justify-content: space-between
+    border-bottom-width: 0px!important
+    div
+        padding: 1rem
+    i
+        margin-right: 0px
+    .header-vote-participants
+        &.incomplete
+            background-color: $primary-red
+        &.complete
+            background-color: $primary-green
+        justify-content: flex-end
+        background-color: $primary-blue
+        color: #FFF
+        width: 11rem
+        flex: 0 0 11rem
+        font-size: 1rem
+        box-shadow: inset 0 -2px 3px rgba(0,0,0,0.1)
+        heigth: 35px
+        i
+            font-size: 1.2rem
+            vertical-align: text-bottom
+    &.active
+        .header-vote-participants
+            box-shadow: none!important
+    .title
+        font-size: 1rem
+        font-weight: bold
+        padding: 0.5rem 0px 0.5rem 15px
+        flex: 1 0 auto
+        text-align: left
+
+.collapsible-body
+    padding: 0
+    border-bottom: 0px
+    .flex-wrapper
+        display: flex
+        justify-content: space-between
+        >div
+            padding: 0rem 
+        .left-body
+            flex: 1 1 auto
+            .col
+                padding: 0px 2rem
+            text-align: left
+            .btn-flat
+                i
+                    font-size: 24px!important
+            .body-icon
+                vertical-align: middle
+                margin-right: 10px
+        .right-body
+            &.incomplete
+                background-color: lighten($primary-red, 5%)
+            &.complete
+                background-color: lighten($primary-green, 5%)
+            width: 11rem
+            padding: 0.4rem
+            flex: 0 0 11rem
+            color: #FFF
+            justify-content: flex-end
+            background-color: lighten($primary-blue,5%)
+            i
+                vertical-align: text-bottom
+        .footer-body
+            background-color: #F1F1F1
+            text-align: center
+            .btn
+                margin: 5px
+
+.chip 
+    .actions
+        float: right
+        font-size: 16px
+        line-height: 32px
+        padding-left: 8px
+        color: #333
+        i
+            cursor: pointer
+            font-size: 16px
+            line-height: 32px
+        /deep/ i
+            cursor: pointer
+            font-size: 16px
+            color: #333
+            line-height: 32px
+
+.collapsible-body
+    &.single
+        display: block!important
+.collapsible-header
+    &.single
+        cursor: default
+        .header-vote-participants
+            box-shadow: none
+@media only screen and (max-width: 600px)
+    .flex-wrapper
+        display: block!important
+        .right-body
+            width: 100%!important
+            padding: 1rem!important
+
+.qrcode
+    margin-top: 15px
+    display: flex
+    justify-content: center
+    align-items: center

@@ -1,0 +1,159 @@
+<article class="container">
+    <form materialize #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+      <div class="row center">
+        <div class="col s12">
+          <div class="">
+            <div class="card-content">
+              <h3 translate="PollCreate.Title"></h3>
+              <div class="row">
+                  <div class="col s12 m6">
+                      <div class="card">
+                        <div class="card-content black-text">
+                            <span class="card-title" translate="PollCreate.MainInformation"></span>
+                            <select materialize="material_select" 
+                                    name="votingProcessMode"
+                                    #modeVotingProcess="ngModel"
+                                    [materializeSelectOptions]="votingProcessModes" 
+                                    [(ngModel)]="poll.IdVotingProcessMode"
+                                    required>
+                              <option value="" disabled selected translate="PollCreate.SelectVotingProcess"></option>
+                              <option *ngFor="let mode of votingProcessModes" [ngValue]="mode.Id" >{{getModeName(mode)}}</option>
+                            </select>
+                            <div class="input-field">
+                              <input id="poll-title-text" 
+                                    type="text"
+                                    [(ngModel)]="poll.Name" 
+                                    name="poll-title-text"
+                                    required>
+                              <label for="poll-title-text" translate="PollCreate.PollTitle"></label>
+                            </div>
+                            <div class="input-field">
+                              <textarea id="description-textarea" class="materialize-textarea"
+                              [(ngModel)]="poll.Description" name="description-textarea"></textarea>
+                              <label for="description-textarea" translate="Shared.PollDescription"></label>
+                            </div>
+                            <div class="switch">
+                              <label>
+                                  {{poll.Public ? translate.instant('Shared.Public') : translate.instant('Shared.Private')}}
+                                <input [(ngModel)]="poll.Public" name="poll-public-checkbox" type="checkbox">
+                                <span class="lever"></span>
+                              </label>
+                            </div>
+                            <small class="grey-text" *ngIf="poll.Public" translate="PollCreate.PublicText"></small>
+                            <small class="grey-text" *ngIf="!poll.Public" translate="PollCreate.PrivateText"></small>
+                        </div>
+                      </div>
+                      <div class="card">
+                        <div class="card-content">
+                            <span class="card-title" translate="Shared.Author"></span>
+                            <div class="row center-align" *ngIf="loggedIn">
+                              <p class="center-align">{{poll.Author}}</p>
+                              <p class="center-align">{{poll.MailAuthor}}</p>
+                            </div>  
+                            <div *ngIf="!loggedIn">
+                              <div class="input-field">
+                                  <input id="auteur" 
+                                        type="text"
+                                        [(ngModel)]="poll.Author" 
+                                        name="author"
+                                        required>
+                                  <label for="author" translate="PollCreate.YourName"></label>
+                                </div>
+                                <div class="input-field">
+                                  <input id="mailAuthor" 
+                                        type="email"
+                                        [(ngModel)]="poll.MailAuthor" 
+                                        name="mailAuthor"
+                                        #mailAuteur="ngModel"
+                                        email
+                                        required>
+                                  <label for="mailAuthor" translate="PollCreate.YourEmail"></label>
+                                </div>
+                                <div *ngIf="poll.MailAuthor && mailAuthor.errors">
+                                    <div [hidden]="!mailAuthor.errors.email"
+                                          class="red-text" translate="Shared.MailNotValid">
+                                    </div>
+                              </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col s12 m6">
+                      <div class="card">
+                        <div class="card-content black-text">
+                          <div class="valign-wrapper">
+                            <span class="card-title" translate="PollCreate.Proposals"></span>
+                            <input id="hackValidationProposition" 
+                                    name="hackValidationProposition"
+                                    #hackValidationProposition="ngModel"
+                                    [ngModel]="poll.options.length"
+                                    style="display:none"
+                                    type="number" required min="1">
+                          </div>
+                          <ul class="collection">
+                              <li *ngFor = "let proposition of poll.options; let i = index;"
+                                  class="collection-item" >
+                                  <app-color-picker [(couleur)]="proposition.Color" [resetable]="false"></app-color-picker>
+                                  <span class="title">
+                                    {{proposition.Name}}
+                                  </span>
+                                  <p class="description">
+                                    {{proposition.Description}}
+                                  </p>
+                                  <div class="actions">
+                                      <app-proposition-modal [proposition]="proposition" cssClass="collection-btn"></app-proposition-modal>
+                                      <a (click)="removeProposition(proposition)">
+                                        <i class="material-icons">delete</i>
+                                      </a>
+                                  </div>
+                                  
+                              </li>
+                              <li *ngIf="!poll.options || poll.options.length == 0"
+                                  class="collection-item" translate="PollCreate.NoProposal"></li>
+                          </ul>
+                          <div class="input-field">
+                              <input id="nouvelle-proposition" type="text"
+                              (keyup.enter)="addNewProposition();"
+                              (keydown.enter)="$event.preventDefault()"
+                              [(ngModel)]="newProposition.Name" name="nouvelle-proposition">
+                              <label for="nouvelle-proposition" translate="PollCreate.NewProposal"></label>
+                          </div>
+                          <a class="btn" (click)="addNewProposition()" [ngClass]="{'disabled': !newProposition.Name}"><i class="material-icons left">add</i> {{'Shared.Add' | translate}}</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="center-align">
+            <div class="progress" *ngIf="isLoading()">
+                <div class="indeterminate left"></div>
+            </div>
+            <button class="waves-effect waves-light btn-large bg-primary-blue" 
+              *ngIf="!isLoading()" 
+              type="submit" 
+              [disabled]="!isPollOk(f)"
+              translate="PollCreate.Publish"></button>
+        </div>
+    </form>
+  </article>
+  
+<!-- Modal RSA -->
+<div class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalRSAActions">
+    <div class="modal-content">
+        <h4 translate="PollCreate.ModalTitle"></h4>
+        <p translate="PollCreate.ModalText1"></p>
+        <textarea #cleRSA [value]="encrypt.getPrivateKeyB64()" readonly></textarea>
+        <div class="center-align">
+          <a class="waves-effect waves-green btn-flat" (click)="copyKey(cleRSA)">Copier la clé</a>
+        </div>
+        <span [innerHTML]="'PollCreate.ModalText2' | translate"></span>
+      </div>
+    <div class="modal-footer">
+        <a (click)="closeModalRSA()" class="modal-action waves-effect waves-green btn-flat" translate="Shared.Cancel"></a>
+        <a (click)="sendVotingProcess()" disabled class="modal-action waves-effect waves-light btn red" translate="PollCreate.KeepKey"></a>
+        <a (click)="sendVotingProcess(encrypt.getPrivateKeyB64())" class=" modal-action waves-effect waves-light btn green" translate="PollCreate.SaveKey"></a>
+    </div>
+</div>

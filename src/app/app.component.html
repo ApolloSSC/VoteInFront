@@ -1,0 +1,80 @@
+<header>
+  <div class="navbar-fixed hide-on-small-only">
+    <nav>
+      <div class="nav-wrapper bg-primary-blue">
+        <a routerLink="/" class="brand-logo">
+          <img src="assets/images/logo-white.svg">
+          <span>VoteIn</span>
+        </a>
+        
+        <div class="by-apollo">
+          by
+          <a href="http://apollossc.com/"><img src="assets/images/logo-apollo.svg"></a> 
+        </div>
+        
+        <ul class="right">
+          <li><a routerLink="/poll/create"><i class="material-icons left">add</i><span translate="StartPage.NewVote"></span></a></li>
+          <ng-container *ngIf="authService.loggedIn()">
+            <li><a routerLink="/poll"><i class="material-icons left">list</i><span translate="StartPage.MyVotes"></span></a></li>
+            <li><a><i class="material-icons left">account_circle</i>{{authService.getUser().UserName}}</a></li>
+            <li><a (click)="logout()"><i class="material-icons left">exit_to_app</i></a></li>
+          </ng-container>
+          <ng-container *ngIf="!authService.loggedIn()">
+            <li><a routerLink="/login"><i class="material-icons left">perm_identity</i><span translate="Shared.Login"></span></a></li>
+          </ng-container>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <nav class="hide-on-med-and-up bg-primary-blue">
+      <div class="text-left">
+        <ul id="slide-out" class="side-nav fixed">
+          <li class="logo" style="text-align: center;">
+            <img src="assets/images/logo.svg" style="padding-top: 10px;">
+          </li>
+          <li><a routerLink="/poll/create"><i class="material-icons left">add</i><span translate="StartPage.NewVote"></span></a>
+          <ng-container *ngIf="!authService.loggedIn()">
+            <li><a routerLink="/login"><i class="material-icons left">perm_identity</i><span translate="Shared.Login"></span></a></li>
+          </ng-container>
+          <ng-container *ngIf="authService.loggedIn()">
+              <li><a><i class="material-icons left">account_circle</i>{{authService.getUser().UserName}}</a></li>
+              <li><a routerLink="/poll"><i class="material-icons left">list</i><span translate="StartPage.MyVotes"></span></a></li>
+              <li><a (click)="logout()"><i class="material-icons left">exit_to_app</i><span translate="StartPage.Logout"></span></a></li>
+          </ng-container>
+        </ul>
+        <a href="#" materialize="sideNav" [materializeParams]="[{edge:'left', closeOnClick:true}]" data-activates="slide-out"
+           class="button-collapse">
+           <i class="material-icons left">menu</i>
+        </a>
+        <a routerLink="/" class="brand-logo">
+          <img src="assets/images/logo-white.svg">
+          <span>VoteIn</span>
+        </a>
+      </div>
+    </nav>
+</header>
+<main>
+    <!--Injection des différents components ici-->
+  <router-outlet></router-outlet>
+</main>
+
+<footer class="page-footer bg-primary-blue" *ngIf="router.url === '/home'">
+  <div class="container">
+      <div class="row">
+        <div class="col l12 s12">
+          <h5 class="white-text">VoteIn</h5>
+          <p>
+            VoteIn est développé par Apollo SSC. Le code source de l'application cliente est disponible sur 
+            
+            <a class="grey-text text-lighten-4" href="https://github.com/ApolloSSC/VoteInFront"><strong>Github</strong></a>
+          </p>
+        </div>
+    </div>
+  </div>
+  <div class="footer-copyright">
+    <div class="container">
+    © 2018 Copyright Apollo SSC
+    <a class="grey-text text-lighten-4 right" href="http://apollossc.com">Apollo SSC</a>
+    </div>
+  </div>
+</footer>

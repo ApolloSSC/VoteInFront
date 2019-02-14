@@ -1,0 +1,34 @@
+<a (click)="openModal()" [ngClass]="cssClass">
+  <i class="material-icons">edit</i>
+</a>
+<!-- Modal Structure -->
+<div class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
+    <div class="modal-content">
+      <h4 class="center-align" translate="Proposition.Title"></h4>
+      <div class="input-field">
+          <input id="nomProposition" type="text"
+            class="validate"
+            [placeholder]="'Shared.Name' | translate"
+            (keydown.enter)="$event.preventDefault()"
+            required
+            [(ngModel)]="proposition.Name" name="nomProposition">
+          <label for="nomProposition" translate="Shared.Name"></label>
+      </div>
+      <div class="input-field">
+          <textarea id="descriptionProposition" 
+            class="materialize-textarea"
+            placeholder=" "
+            [(ngModel)]="proposition.Description"></textarea>
+          <label for="descriptionProposition" translate="Shared.Description"></label>
+      </div>
+      <div class="input-field left-align">
+        <span translate="Shared.Color"></span>
+        <app-color-picker name="couleur" [(couleur)]="proposition.Color"></app-color-picker>
+      </div>
+      
+    </div>
+    <div class="modal-footer">
+      <a (click)="closeModal()" class=" modal-action modal-close waves-effect waves-green btn-flat" translate="Shared.Cancel"></a>
+      <a (click)="update()" class=" modal-action modal-close waves-effect waves-green btn-flat" translate="Shared.Confirm"></a>
+    </div>
+</div>

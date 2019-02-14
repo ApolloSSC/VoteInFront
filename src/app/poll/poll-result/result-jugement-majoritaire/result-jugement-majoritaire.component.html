@@ -1,0 +1,51 @@
+<div class="card">
+  <div class="card-content">
+    <div class="row">
+      <div class="chart-container">
+          <app-chart-jugement-majoritaire
+            [results]="ngxResult"
+            [median]="median"
+            [legend]="true"
+            [legendTitle]="'PollResult.Legend' | translate"
+            [xAxis]="true"
+            [yAxis]="true"
+            [scheme]="customColors"
+            [schemeLine]="customColorLine">
+          </app-chart-jugement-majoritaire>
+        </div>
+    </div>
+    <div class="row">
+      <h3 translate="PollResult.DetailedResult"></h3>
+      <table class="highlight centered">
+        <thead>
+          <tr>
+            <th translate="PollResult.Candidate"></th>
+            <th translate="PollResult.MentionRetained"></th>
+            <th translate="PollResult.Adherence"></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let resultat of Resultat.IndividualResults">
+            <td class="candidat">
+                {{resultat.Option.Name}}
+            </td>
+            <td class="mention">
+                <span class='badge-mention' [style.background]="customColors.domain[resultat.Median.Value]">{{resultat.Median.Name | translate}}</span>
+            </td>
+            <td class="adhesion">
+              <span class="big">
+                  {{(100 -resultat.PercentageScoreInfMedian).toFixed(2)}}%
+              </span>
+              <span class="percentMeilleures">
+                  ({{resultat.PercentageScoreSupMedian.toFixed(2)}}% <span translate="PollResult.StrictlyBetterMentions"></span>)
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+

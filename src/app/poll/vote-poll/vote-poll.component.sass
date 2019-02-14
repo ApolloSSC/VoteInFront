@@ -1,0 +1,57 @@
+@import "../../variables.sass";
+\:host /deep/ .collapsible-header
+    .circle    
+        vertical-align: middle;
+        width: 2rem;
+        height: 2rem;
+        box-shadow: 0px 1px 3px rgba(0,0,0,0.5);
+        display: inline-block;
+    .title
+        vertical-align: middle;
+        display: inline-block;
+
+.btn-share
+    text-transform: none;
+    background: #FFF!important;
+    color: #333!important;
+
+.invitations
+    text-align: center;
+    textarea
+        margin: 0;
+        padding: 5px 0px;
+        color: #333;
+    h3
+        margin: 0;
+        font-size: 1.3rem;
+    .card
+        margin: 5px auto;
+        .card-content
+            &:first-child
+                padding: 24px 24px 0px 24px;
+    .input-field
+        margin-top: 0px;
+    .collection
+        margin: 0;
+    #electeurs
+        text-align: left;
+header
+    background: lighten($primary-blue, 5%);
+    color: #FFF;
+    text-align: center;
+    padding: 10px;
+    h5
+        margin: 0px;
+    p
+        &.small
+            font-size: 0.8rem;
+        margin: 0px;
+@media only screen and (max-width: 600px)
+    h5
+        font-size: 1rem;
+        white-space: nowrap;
+        font-weight: bold;
+        width: 100%;
+        overflow: hidden;
+    .container
+        width: 100%;

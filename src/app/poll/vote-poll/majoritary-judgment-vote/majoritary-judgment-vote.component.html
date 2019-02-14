@@ -1,0 +1,50 @@
+<section class="collapsible-container center">
+  <ul materialize="collapsible" class="collapsible popout no-border" data-collapsible="accordion">
+    <li *ngFor="let option of votingProcess.options"> 
+      <div class="collapsible-header valign-wrapper">
+          <div class="header-container">
+              <div class="row valign-wrapper">
+                  <div class="col s6 m6 l8">
+                    <div class="row valign-wrapper">
+                      <div class="col">
+                        <i class="circle" *ngIf="option.Color" [style.background]="option.Color"></i>
+                        <div class="title">
+                            {{ option.Name }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col s6 m6 l4">
+                    <div>
+                      <a materialize="dropdown" class='dropdown-button btn'
+                        data-stopPropagation="true" 
+                          [ngClass]="getChoixClass(getChoixForPropositon(option))" 
+                          [attr.data-activates]="'dropdown-'+option.Id">
+                        {{getChoixForPropositon(option)?(getChoixForPropositon(option).Name | translate): "Voter"}}
+                      </a>
+                      <ul [id]="'dropdown-'+option.Id" class='dropdown-content'>
+                        <li *ngFor="let c of votingProcess.VotingProcessMode.Choice">
+                          <a (click)="$event.stopPropagation();selectGrade(option, c);"  
+                            data-stopPropagation="true" [ngClass]="getChoixClass(c)">
+                            {{c.Name | translate}}
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="collapsible-body no-border left-align">
+        <p>{{ option.Description?option.Description:'Pas de description' }}</p>
+      </div>
+    </li>
+  </ul>
+  <button [disabled]="!isVoteOk()" 
+          (click)="vote()" 
+          class="btn-large waves-effect waves-light btn-valider bg-primary-blue" 
+          name="action">
+          Soumettre
+  </button>
+</section>  
+

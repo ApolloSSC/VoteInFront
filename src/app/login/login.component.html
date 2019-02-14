@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="row">
+    <div class="col s12 m5 center-align">
+      <h4 translate="Login.ConnectTitle"></h4>
+      <form materialize #flogin="ngForm" (ngSubmit)="onSubmitLogin(flogin)">
+          <div class="input-field">
+            <input id="UserName" 
+                   type="text" 
+                   [(ngModel)]="loginModel.UserName"
+                   name="UserName"
+                   required>
+            <label for="UserName" translate="Login.Username"></label>
+          </div>
+          <div class="input-field">
+            <input id="Password" 
+                   type="password" 
+                   [(ngModel)]="loginModel.Password"
+                   name="Password"
+                   required
+                   autocomplete="new-password">
+            <label for="Password" translate="Login.Password"></label>
+          </div>
+          <button type="submit" class="waves-effect waves-light btn" [disabled]="loggingIn || !flogin.valid"><span translate="Shared.Login"></span>{{loggingIn?'...':''}}</button>
+          <a class="btn" routerLink="/password" translate="Shared.ForgottenPassword"></a>
+      </form>
+    </div>
+    <div class="col s12 m2 center-align">
+        <h4 translate="Login.Or"></h4>
+    </div>
+    <div class="col s12 m5 center-align">
+      <h4 translate="Login.CreateAccount">
+      </h4>
+      <form autocomplete="off" materialize #fregister="ngForm" (ngSubmit)="onSubmitRegister(fregister)">
+          <div class="input-field">
+            <input id="newname" 
+                   type="text" 
+                   class="validate"
+                   [(ngModel)]="registerModel.UserName"
+                   name="newname"
+                   required >
+            <label for="newname" translate="Login.Username"></label>
+          </div>
+          <div class="input-field">
+            <input id="Email" 
+                   type="email" 
+                   class="validate"
+                   [(ngModel)]="registerModel.Email"
+                   name="Email"
+                   required >
+            <label for="Email" translate="Shared.Email"></label>
+          </div>
+          <div class="input-field">
+            <input id="PasswordReg" 
+                   type="password" 
+                   class="validate"
+                   [(ngModel)]="registerModel.Password"
+                   pattern="^(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
+                   name="PasswordReg"
+                   #passwordReg="ngModel"
+                   required  
+                   autocomplete="new-password">
+            <label for="PasswordReg" translate="Login.Password"></label>
+            <div *ngIf="passwordReg.errors">
+                <div [hidden]="!passwordReg.errors.pattern"
+                      class="white-text deep-orange darken-4 left-align password-tips" [innerHTML]="'Shared.PasswordError' | translate"></div>
+            </div>
+          </div>
+          <button type="submit" class="waves-effect waves-light btn" [disabled]="registering || !fregister.valid" translate="Shared.Confirm"></button>
+      </form>
+    </div>
+  </div>
+</div>

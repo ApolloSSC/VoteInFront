@@ -1,0 +1,40 @@
+<article class="container">
+    <div class="progress" *ngIf="resultat == null">
+        <div class="indeterminate left"></div>
+    </div>
+    <div class="row center" *ngIf="votingProcess && resultat != null">
+        <div class="card bg-primary-blue">
+            <div class="card-content" *ngIf='resultat.Winner'>
+                <div class="card-title">
+                    <span translate="PollResult.WinnerIs"></span> <b>{{votingProcess.Name}}</b> <span translate="Shared.Is"></span> <b>{{resultat.Winner.Name}}</b>!
+                </div>
+                {{resultat.Voters}} <span translate="PollResult.VotersDecided"></span>
+            </div>
+            <div class="card-content" *ngIf='!resultat.IsValidResult'>
+                <div class="card-title" translate="PollResult.ImpossibleWinner"></div>
+            </div>
+        </div>
+        <div class="share">
+            <share-buttons 
+                [theme]="'material-dark'"
+                [include]="['facebook','twitter','google','linkedin','reddit','tumblr','whatsapp','telegram','email','copy']"
+                [showText]="true"
+                [size]="-2"
+                [title]="votingProcess.Name"
+                Description="'Shared.ElectionResult' | translate"
+              ></share-buttons>
+        </div>
+        <app-result-jugement-majoritaire 
+            *ngIf="modeScrutin == 'jugement-majoritaire'"
+            [Resultat]="resultat">
+        </app-result-jugement-majoritaire>
+        <app-result-scrutin-majoritaire 
+            *ngIf="modeScrutin == 'scrutin-majoritaire'"
+            [Resultat]="resultat">
+        </app-result-scrutin-majoritaire>
+        <app-result-vote-alternatif 
+            *ngIf="modeScrutin == 'vote-alternatif'"
+            [Resultat]="resultat">
+        </app-result-vote-alternatif>
+    </div>
+</article>

@@ -1,0 +1,71 @@
+/* You can add global styles to this file, and also import other style files */
+@import "app/variables.sass"
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,400i,700,700i')
+@import '~@ngx-share/button/styles/share-buttons'
+@import '~@ngx-share/button/styles/themes/default/default-theme'
+@import '~@ngx-share/button/styles/themes/material/material-dark-theme'
+
+html, body
+    font-family: 'Raleway', sans-serif
+
+a
+    cursor: pointer
+h3 
+    font-size: 2rem!important
+strong
+    font-weight: bold!important
+ul
+    overflow: visible
+
+.bg-primary-blue
+    background-color: $primary-blue!important
+    color: #FFF
+.bg-dark-blue
+    background-color: darken($primary-blue,10%)!important
+    color: #FFF
+    .header
+        color: #FFF!important
+.bg-secondary-blue
+    background-color: $secondary-blue!important
+
+.bg-third-blue
+    background-color: $primary-gray!important
+    
+.bg-primary-gray
+    background-color: $primary-gray!important
+
+.primary-black
+    color: $primary-black!important
+
+.primary-red
+    color: $primary-red!important
+
+.btn,.btn-floating
+    background-color: $primary-blue!important
+
+app-root
+    display: flex
+    min-height: 100vh
+    flex-direction: column
+  
+main 
+    flex: 1 0 auto
+    background: #FAFAFA
+  
+.progress
+    background-color: $primary_blue!important
+    .indeterminate
+        background-color: lighten($primary_blue, 40%)!important
+.chip
+    color: rgba(0, 0, 0, 0.8)!important
+    .circle
+        float: left
+        margin: 0 8px 0 -12px
+        height: 32px
+        width: 32px
+        border-radius: 50%
+
+//Share buttons
+.sb-group
+    justify-content: center
+        

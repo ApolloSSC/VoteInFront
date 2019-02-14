@@ -1,0 +1,84 @@
+<div *ngIf="aVote" class="center">
+    <h5 translate="Vote.ThankForVoting"></h5>
+  </div>
+  <article class="container invitations" *ngIf="isAuthor && votingProcess && !votingProcess.ClosingDate">
+    <div class="card bg-primary-blue" *ngIf="votingProcess.Public">
+      <div class="card-title" translate="Vote.InviteVoters"></div>
+      <div class="card-content grey lighten-4 text-center">
+        <share-buttons 
+          [theme]="'material-dark'"
+          [include]="['facebook','twitter','google','linkedin','pinterest','reddit','tumblr','whatsapp','telegram','email','copy']"
+          [showText]="true"
+          [size]="-2"
+          [title]="votingProcess.Name"
+          Description="Participez à l'élection en votant"
+        >
+        </share-buttons>
+      </div>
+    </div>
+    <div class="card bg-primary-blue" *ngIf="!votingProcess.Public">
+        <div class="card-tabs">
+          <ul class="tabs tabs-fixed-width tabs-transparent" materialize="tabs">
+            <li class="tab"><a class="active" href="#ajout" translate="Vote.AddVoter"></a></li>
+            <li class="tab"><a href="#electeurs"><span translate="Vote.ListVoter"></span> ({{votingProcess.Voter?.length}})</a></li>
+          </ul>
+        </div>
+        <div class="card-content grey lighten-4 black-text">
+          <div id="ajout" *ngIf="newElecteursForm">
+            <form (submit)="addElecteurs(newElecteursForm.value)" [formGroup]="newElecteursForm">
+                <div class="input-field">
+                  <textarea name="newElecteurs" formControlName="newElecteurs" class="materialize-textarea"></textarea>
+                  <label for="newElecteurs" translate="Vote.MailsToAdd"></label>
+                </div>
+                <div *ngIf="newElecteurs.invalid && (newElecteurs.dirty || newElecteurs.touched)">
+                    <small *ngIf="newElecteurs.errors.invalidEmails" class="red-text" translate="Vote.MailsNotValid"></small>
+                </div>
+                <button type="submit" class="btn" [disabled]="!newElecteursForm.valid" translate="Shared.Add"></button>
+            </form>
+          </div>
+          <div id="voters">
+              <ul class="collection">
+                <li class="collection-item center" *ngIf="!votingProcess.Voter || votingProcess.Voter.length == 0" translate="Vote.NoVoters"></li>
+                <li class="collection-item" *ngFor="let voter of votingProcess.Voter">
+                  {{voter.Mail}} 
+                  <!-- <a [routerLink]="['/p',electeur.Token]">{{electeur.Token}}</a> -->
+                  <span *ngIf="!voter.HasVoted" class="badge" translate="Vote.HasNotVoted"></span>
+                  <span *ngIf="voter.HasVoted" class="badge" translate="Vote.HasVoted"></span>
+                </li>
+              </ul>
+          </div>
+        </div>
+      </div>
+  </article>
+  <article class="container center" *ngIf="isAuthor && votingProcess != null">
+      <div class="card">
+          <div class="card-content no-padding">
+              <div app-poll-detail [votingProcess]="votingProcess" [isSingle]="true" (onDelete)="onDelete()"></div>
+          </div>
+      </div>
+  </article>
+  <ng-container *ngIf="!aVote && votingProcess && !votingProcess.ClosingDate">
+    <header *ngIf="!isAuthor && votingProcess != null">
+      <h5>
+          {{votingProcess?.Name}}
+      </h5>
+      <p class="small">
+          {{votingProcess?.VotingProcessMode?.Name}} <span translate="Shared.OpenedOn"></span> {{votingProcess?.OpeningDate | date: 'dd/MM/yyyy'}} <span translate="Shared.By"></span> {{votingProcess.Author}}
+      </p>
+      <p>
+          {{votingProcess.Description}}
+      </p>
+    </header>
+    <article class="container" *ngIf="!isAuthor">
+      <app-vote-jugement-majoritaire [votingProcess]="votingProcess" (onVote)="vote($event)" *ngIf="votingProcess?.VotingProcessMode?.Code == 'jugement-majoritaire'"></app-vote-jugement-majoritaire>
+      <app-vote-scrutin-majoritaire [votingProcess]="votingProcess" (onVote)="vote($event)"  *ngIf="votingProcess?.VotingProcessMode?.Code == 'scrutin-majoritaire'"></app-vote-scrutin-majoritaire>
+      <app-vote-alternatif [votingProcess]="votingProcess" (onVote)="vote($event)"  *ngIf="votingProcess?.VotingProcessMode?.Code == 'vote-alternatif' || votingProcess?.VotingProcessMode?.Code == 'condorcet-randomise'"></app-vote-alternatif>
+    </article> 
+  </ng-container>
+  
+  <ng-container *ngIf="!isAuthor && votingProcess && votingProcess.ClosingDate">
+    <article class="container center">
+      <h5 translate="Vote.ClosedVote"></h5>
+      <button class="btn" [routerLink]="['/poll', votingProcess.Guid,'result']" translate="Vote.ShowResult"></button>
+    </article> 
+  </ng-container>
