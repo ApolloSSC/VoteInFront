@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from './services/auth/auth.service';
 import { SEOService } from './services/seo.service';
 import { TranslateService } from '@ngx-translate/core';
+import { AppConfig } from './app.config';
 
 @Component({
   selector: 'app-root',
@@ -10,8 +11,8 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
-  private authorizedLanguages = ['en', 'fr'];
-  private defaultLanguage = 'en';
+  private authorizedLanguages = AppConfig.settings.authorizedLanguages;
+  private defaultLanguage = AppConfig.settings.defaultLang;
 
   constructor(public router: Router, public authService: AuthService, private seoService: SEOService, private translate: TranslateService) {
     seoService.addSeoData();

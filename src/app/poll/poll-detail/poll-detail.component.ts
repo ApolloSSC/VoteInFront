@@ -5,6 +5,7 @@ import { VotingProcess, Option } from '../../model/model';
 import { VotingProcessApiService } from '../../services/api/votingProcessApi.service';
 import { Router } from '@angular/router';
 import * as signalR from '@aspnet/signalr';
+import { AppConfig } from '../../app.config';
 
 @Component({
   selector: '[app-poll-detail]',
@@ -18,7 +19,7 @@ export class PollDetailComponent implements OnInit {
   @Output() onDelete = new EventEmitter<boolean>();
   @Output() onCloture = new EventEmitter<boolean>();
 
-  public hubConnection = new signalR.HubConnectionBuilder().withUrl('http://localhost:44356/signalr').build();
+  public hubConnection = new signalR.HubConnectionBuilder().withUrl(AppConfig.settings.serverPath + 'signalr').build();
   public basePath = window.location.origin;
 
   public isCreated = false;

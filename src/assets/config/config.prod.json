@@ -1,0 +1,6 @@
+{
+    "rootPath": "http://your-app.com/",
+    "serverPath": "http://server-of-your-app.com/",
+    "defaultLang": "en",
+    "authorizedLanguages": ["en","fr"]
+}

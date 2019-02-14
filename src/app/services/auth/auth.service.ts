@@ -8,6 +8,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 const helper = new JwtHelperService();
 
 import { RegisterViewModel, AuthViewModel, AuthToken, User, ResetPasswordViewModel } from '../../model/model';
+import { AppConfig } from '../../app.config';
 
 @Injectable()
 export class AuthService {
@@ -22,8 +23,7 @@ export class AuthService {
 
   }
 
-  protected apiUrl = isDevMode()?"http://localhost:44356/api/":"https://voteinback.azurewebsites.net/api/";
-  //protected apiUrl = "http://voteinback.azurewebsites.net/api/";
+  protected apiUrl = AppConfig.settings.serverPath + "api/";
   protected controllerName = "Auth";
 
   public currentUserName: string;

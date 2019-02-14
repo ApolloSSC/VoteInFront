@@ -5,6 +5,7 @@ import { SharedService } from '../shared.service';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../auth/auth.service';
 import { isDevMode } from '@angular/core';
+import { AppConfig } from '../../app.config';
 
 // Decorator to tell Angular that this class can be injected as a service to another class
 export abstract class GenericApiService<T> {
@@ -24,7 +25,7 @@ export abstract class GenericApiService<T> {
     }
 
     // Base URL for API
-    protected apiUrl = (isDevMode() ? 'http://localhost:44356/api/' : 'https://voteinback.azurewebsites.net/api/');
+    protected apiUrl = AppConfig.settings.serverPath + 'api/';
     // protected apiUrl = "https://voteinback.azurewebsites.net/api/";
     protected controllerName = '';
 

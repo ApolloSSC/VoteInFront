@@ -289,3 +289,10 @@ export class ngxScore {
     name: string;
     value: number;
 }
+
+export interface IAppConfig {
+    rootPath: string;
+    serverPath: string;
+    defaultLang: string;
+    authorizedLanguages: Array<string>;
+}

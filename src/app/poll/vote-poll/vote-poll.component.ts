@@ -14,6 +14,7 @@ import * as aesjs from 'aes-js';
 import { $ } from 'jquery';
 import { AuthService } from '../../services/auth/auth.service';
 import * as signalR from '@aspnet/signalr';
+import { AppConfig } from '../../app.config';
 
 declare function escape(s: string): string;
 declare function unescape(s: string): string;
@@ -25,7 +26,7 @@ declare function unescape(s: string): string;
 })
 export class VotePollComponent implements OnInit {
 
-  public hubConnection = new signalR.HubConnectionBuilder().withUrl('http://localhost:44356/signalr').build();
+  public hubConnection = new signalR.HubConnectionBuilder().withUrl(AppConfig.settings.serverPath + 'signalr').build();
 
   public pollGuid: string;
   public token: string;

@@ -15,7 +15,12 @@ import { SharedService } from './services/shared.service';
 import { LoginComponent } from './login/login.component';
 import { SEOService } from './services/seo.service';
 import { PasswordComponent } from './password/password.component';
+import { APP_INITIALIZER } from '@angular/core';
+import { AppConfig } from './app.config';
 
+export function initializeApp(appConfig: AppConfig) {
+  return () => appConfig.load();
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +40,13 @@ import { PasswordComponent } from './password/password.component';
     EnvelopeApiService,
     AuthGuard,
     AuthService,
-    SEOService
+    SEOService,
+    AppConfig,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeApp,
+      deps: [AppConfig], multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

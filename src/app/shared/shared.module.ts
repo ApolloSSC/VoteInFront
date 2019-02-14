@@ -18,6 +18,7 @@ import { HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { QRCodeModule } from 'angularx-qrcode';
+import { AppConfig } from '../app.config';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
