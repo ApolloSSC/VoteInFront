@@ -3,6 +3,7 @@ export class Option { constructor() {}
     Name: string;
     Description: string;
     Color: string;
+    Photo: string;
 }
 
 export class Envelope { constructor() {}

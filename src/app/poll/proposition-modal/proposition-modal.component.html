@@ -25,7 +25,17 @@
         <span translate="Shared.Color"></span>
         <app-color-picker name="couleur" [(couleur)]="proposition.Color"></app-color-picker>
       </div>
-      
+      <div class="input-field">
+        <span translate="Shared.Photo"></span> <br/>
+        <img [src]="proposition.Photo" height="150"/> <br/>
+        <input type="file" [id]="'photo' + proposition.Id" name="photo" class="hide" (change)="fileChange($event)" accept=".png,.jpg,.bmp">        
+        <button type="button" class="btn" [name]="'#photo' + proposition.Id" onclick="$(this.name).click();" translate="Shared.AddPhoto">
+          Upload a photo
+        </button>
+        <button *ngIf="proposition.Photo != ''" type="button" class="btn red" (click)="deletePhoto();"><i class="material-icons">close</i></button>
+        <button *ngIf="proposition.Photo == ''" type="button" class="btn red disabled" (click)="deletePhoto();"><i class="material-icons">close</i></button>
+        <span *ngIf="error != ''" class="red-text">{{error}}</span>
+      </div>
     </div>
     <div class="modal-footer">
       <a (click)="closeModal()" class=" modal-action modal-close waves-effect waves-green btn-flat" translate="Shared.Cancel"></a>

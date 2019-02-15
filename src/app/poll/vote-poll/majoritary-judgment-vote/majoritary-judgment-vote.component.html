@@ -20,7 +20,7 @@
                         data-stopPropagation="true" 
                           [ngClass]="getChoixClass(getChoixForPropositon(option))" 
                           [attr.data-activates]="'dropdown-'+option.Id">
-                        {{getChoixForPropositon(option)?(getChoixForPropositon(option).Name | translate): "Voter"}}
+                        {{getChoixForPropositon(option)?(getChoixForPropositon(option).Name | translate): ("Shared.Voter" | translate)}}
                       </a>
                       <ul [id]="'dropdown-'+option.Id" class='dropdown-content'>
                         <li *ngFor="let c of votingProcess.VotingProcessMode.Choice">
@@ -36,15 +36,15 @@
           </div>
       </div>
       <div class="collapsible-body no-border left-align">
-        <p>{{ option.Description?option.Description:'Pas de description' }}</p>
+        <p>{{ option.Description?option.Description:('Shared.NoDescription' | translate) }}</p>
       </div>
     </li>
   </ul>
   <button [disabled]="!isVoteOk()" 
           (click)="vote()" 
           class="btn-large waves-effect waves-light btn-valider bg-primary-blue" 
-          name="action">
-          Soumettre
+          name="action"
+          translate="Shared.Submit">
   </button>
 </section>  
 

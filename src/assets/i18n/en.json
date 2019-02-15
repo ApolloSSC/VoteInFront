@@ -18,6 +18,7 @@
   "Shared.PublicPoll": "Public election",
   "Shared.PrivatePoll": "Private election",
   "Shared.Voter": "voter",
+  "Shared.Vote": "Vote",
   "Shared.OpenedOn": "opened on",
   "Shared.By": "by",
   "Shared.Submit" : "Submit",
@@ -29,6 +30,12 @@
   "Shared.Stage" : "Stage",
   "Shared.FirstRoundResult" : "Results of the first round",
   "Shared.And" : " and ",
+  "Shared.Photo" : "Photo ",
+  "Shared.AddPhoto": "Upload a photo",
+  "Shared.NoDescription": "No description",
+  "Shared.SaveSuccess": "Registration completed",
+  "Shared.DeleteSuccess": "Deletion completed",
+  "Shared.ServerError": "Server Error",
 
   "Shared.Excellent" : "Excellent",
   "Shared.VeryGood" : "Very good",
@@ -157,5 +164,8 @@
   "PollResult.Legend" : "Legend",
   "PollResult.MedianRating" : "Median rating",
   "PollResult.AlternativeRule" : "At each stage, the candidate with the lowest rankings is eliminated.",
-  "PollResult.SelectedForSecondRound" : " are selected for the second round."
+  "PollResult.SelectedForSecondRound" : " are selected for the second round.",
+
+  "Proposition.SizeError": "File must not exceed 1 MB",
+  "Proposition.FormatError": "This format is not valid"
 }

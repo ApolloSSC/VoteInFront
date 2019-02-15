@@ -5,7 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import 'materialize-css';
 import { MaterializeModule } from 'angular2-materialize';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-// import { HttpModule, Http, RequestOptions } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -18,7 +17,6 @@ import { HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { QRCodeModule } from 'angularx-qrcode';
-import { AppConfig } from '../app.config';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -66,7 +64,9 @@ export function tokenGetter() {
     TranslateModule,
     QRCodeModule
   ],
-  declarations: [ColorPickerComponent],
+  declarations: [
+    ColorPickerComponent
+  ],
   providers: [
     ConstantsService
   ]

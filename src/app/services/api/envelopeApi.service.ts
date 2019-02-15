@@ -8,13 +8,14 @@ import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../auth/auth.service';
 
 import { Envelope, EnvelopeViewModel } from '../../model/model';
+import { TranslateService } from '@ngx-translate/core';
 
 // Decorator to tell Angular that this class can be injected as a service to another class
 @Injectable()
 export class EnvelopeApiService extends GenericApiService<Envelope> {
     
-    constructor(httpClient: HttpClient, sharedService: SharedService, authService: AuthService) {
-        super(sharedService, httpClient, authService);
+    constructor(httpClient: HttpClient, sharedService: SharedService, authService: AuthService, translate: TranslateService) {
+        super(sharedService, httpClient, authService, translate);
         this.controllerName = 'envelope';
     }
 

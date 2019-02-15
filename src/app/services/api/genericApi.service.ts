@@ -6,13 +6,14 @@ import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../auth/auth.service';
 import { isDevMode } from '@angular/core';
 import { AppConfig } from '../../app.config';
+import { TranslateService } from '@ngx-translate/core';
 
 // Decorator to tell Angular that this class can be injected as a service to another class
 export abstract class GenericApiService<T> {
 
-    protected MSG_CREATE_SUCCESS = 'Enregistrement effectué';
-    protected MSG_UPDATE_SUCCESS = 'Enregistrement effectué';
-    protected MSG_DELETE_SUCCESS = 'Suppression effectuée';
+    protected MSG_CREATE_SUCCESS = this.translate.instant('Shared.SaveSuccess');
+    protected MSG_UPDATE_SUCCESS = this.translate.instant('Shared.SaveSuccess');
+    protected MSG_DELETE_SUCCESS = this.translate.instant('Shared.DeleteSuccess');
 
     protected optionsApplicationJson = new RequestOptions({ headers: new Headers({ 'Content-Type': 'application/json' }) });
 
@@ -20,7 +21,8 @@ export abstract class GenericApiService<T> {
     constructor(
         protected sharedService: SharedService,
         protected httpClient: HttpClient,
-        protected authService: AuthService
+        protected authService: AuthService,
+        protected translate: TranslateService
     ) {
     }
 
@@ -103,9 +105,9 @@ export abstract class GenericApiService<T> {
         if (error.json &&  error.json() && error.json().ExceptionMessage) {
             this.sharedService.successToast(error.json().ExceptionMessage);
         } else {
-            this.sharedService.errorToast('Erreur Serveur');
+            this.sharedService.errorToast(this.translate.instant('Shared.ServerError'));
         }
-        return Observable.throw( (error.json ? error.json().error : error) || 'Server error');
+        return Observable.throw( (error.json ? error.json().error : error) || this.translate.instant('Shared.ServerError'));
     }
     protected manageSuccess(res: any, toastMsg?: string, splash: boolean = true) {
         if (splash) {

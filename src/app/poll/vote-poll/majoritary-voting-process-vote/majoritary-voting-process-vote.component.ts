@@ -8,6 +8,7 @@ import { VotingProcessApiService } from '../../../services/api/votingProcessApi.
 import { SharedService } from '../../../services/shared.service';
 
 import { $ } from 'jquery';
+import { TranslateCompiler, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-vote-scrutin-majoritaire',
@@ -25,7 +26,8 @@ export class MajoritaryVotingProcessVoteComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private scrutinApiService: VotingProcessApiService,
     private voteApiService: EnvelopeApiService,
-    private sharedService: SharedService) { }
+    private sharedService: SharedService,
+    private translate: TranslateService) { }
 
   ngOnInit() {}
 
