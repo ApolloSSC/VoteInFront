@@ -37,6 +37,8 @@
       </div>
       <div class="collapsible-body no-border left-align">
         <p>{{ option.Description?option.Description:('Shared.NoDescription' | translate) }}</p>
+        <img *ngIf="proposition.Photo != null && proposition.Photo != ''" [src]="proposition.Photo" height="150"/>
+
       </div>
     </li>
   </ul>

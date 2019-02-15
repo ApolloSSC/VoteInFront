@@ -28,8 +28,8 @@
       <div class="input-field">
         <span translate="Shared.Photo"></span> <br/>
         <img [src]="proposition.Photo" height="150"/> <br/>
-        <input type="file" [id]="'photo' + proposition.Id" name="photo" class="hide" (change)="fileChange($event)" accept=".png,.jpg,.bmp">        
-        <button type="button" class="btn" [name]="'#photo' + proposition.Id" onclick="$(this.name).click();" translate="Shared.AddPhoto">
+        <input type="file" [id]="'photo' + proposition.Name + proposition.Color.substring(1)" name="photo" class="hide" (change)="fileChange($event)" accept=".png,.jpg,.bmp">        
+        <button type="button" class="btn" [name]="'#photo' + proposition.Name + proposition.Color.substring(1)" onclick="$(this.name).click();" translate="Shared.AddPhoto">
           Upload a photo
         </button>
         <button *ngIf="proposition.Photo != ''" type="button" class="btn red" (click)="deletePhoto();"><i class="material-icons">close</i></button>
