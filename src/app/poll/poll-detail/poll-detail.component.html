@@ -28,7 +28,7 @@
                         {{votingProcess.Description}}
                     </span>
                     <div class="input-field" *ngIf="!isClosed">
-                        <textarea id="description-textarea" class="materialize-textarea"
+                        <textarea id="description-textarea" class="materialize-textarea description"
                         placeholder=" "
                         (change)="save()"
                         [(ngModel)]="votingProcess.Description" name="description-textarea"></textarea>
