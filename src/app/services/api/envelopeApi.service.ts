@@ -27,8 +27,7 @@ export class EnvelopeApiService extends GenericApiService<Envelope> {
                 .post(this.apiUrl + this.controllerName + endPoint, obj)
                 .map((res: Response) => this.manageSuccess(res, this.MSG_CREATE_SUCCESS))
                 .catch((error: any) => this.manageError(error));
-        }
-        else {
+        } else {
             return this.httpClient
                 .post(this.apiUrl + this.controllerName + endPoint, obj)
                 .map((res: Response) => this.manageSuccess(res, null, false))

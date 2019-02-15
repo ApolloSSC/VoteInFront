@@ -11,9 +11,9 @@ import { TranslateService } from '@ngx-translate/core';
 // Decorator to tell Angular that this class can be injected as a service to another class
 export abstract class GenericApiService<T> {
 
-    protected MSG_CREATE_SUCCESS = this.translate.instant('Shared.SaveSuccess');
-    protected MSG_UPDATE_SUCCESS = this.translate.instant('Shared.SaveSuccess');
-    protected MSG_DELETE_SUCCESS = this.translate.instant('Shared.DeleteSuccess');
+    protected MSG_CREATE_SUCCESS: string;
+    protected MSG_UPDATE_SUCCESS: string;
+    protected MSG_DELETE_SUCCESS: string;
 
     protected optionsApplicationJson = new RequestOptions({ headers: new Headers({ 'Content-Type': 'application/json' }) });
 
@@ -24,11 +24,13 @@ export abstract class GenericApiService<T> {
         protected authService: AuthService,
         protected translate: TranslateService
     ) {
+        this.translate.get('Shared.SaveSuccess').subscribe(trad => this.MSG_CREATE_SUCCESS = trad);
+        this.translate.get('Shared.SaveSuccess').subscribe(trad => this.MSG_UPDATE_SUCCESS = trad);
+        this.translate.get('Shared.DeleteSuccess').subscribe(trad => this.MSG_DELETE_SUCCESS = trad);
     }
 
     // Base URL for API
     protected apiUrl = AppConfig.settings.serverPath + 'api/';
-    // protected apiUrl = "https://voteinback.azurewebsites.net/api/";
     protected controllerName = '';
 
     get(): Observable<T[]> {
