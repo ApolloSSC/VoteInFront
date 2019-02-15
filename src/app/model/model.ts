@@ -145,6 +145,7 @@ export class AlternativeVote extends Vote {
     }
 
     public getEssential() {
+        this.Ranking.map(r => { r.Photo = null; r.Description = null; });
         return this;
     }
 }

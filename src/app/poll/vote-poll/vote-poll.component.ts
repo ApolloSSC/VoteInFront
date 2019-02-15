@@ -141,7 +141,6 @@ export class VotePollComponent implements OnInit {
   }
 
   vote(vote: Vote) {
-
     const envelopeVM = new EnvelopeViewModel();
     envelopeVM.Envelope = new Envelope();
     envelopeVM.Envelope.IdVotingProcess = vote.IdVotingProcess;
@@ -170,7 +169,7 @@ export class VotePollComponent implements OnInit {
       res => {
         localStorage.setItem('avote-scrutin-' + this.votingProcess.Guid.toString(), this.votingProcess.Guid.toString());
         this.aVote = true;
-    });
+    }, err => console.log(err));
 
     this.hubConnection.invoke('VoteAdded', this.votingProcess.Guid).catch((err => { console.error(err); }));
   }

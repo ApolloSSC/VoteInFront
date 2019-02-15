@@ -25,10 +25,10 @@
     transition: all 0.3s;
 .proposition
     display: flex;
-    height: 30px;
+    /*height: 30px;*/
     padding: 0px;
     margin: 5px;
-    line-height: 30px;
+    /*line-height: 30px;*/
     font-weight: bold;
     border-left: 2px solid currentColor;
     cursor: move;
@@ -47,10 +47,19 @@
         white-space: nowrap;
         overflow: hidden;
         flex: 1 1 auto;
+        .description
+            white-space: pre-line
+            font-weight: normal
+            line-height: 0px !important
+            font-size: smaller
     .ranking
         vertical-align: middle;
         font-size: 1.3rem;
         margin: 0 5px 0 5px;
+    .max-size
+        min-width: 100px;
+        max-width: 100px;
+        object-fit: contain;
 .card-content
     padding: 1px 0px;
     &.empty:after
@@ -85,7 +94,7 @@
     .dnd-zone
         overflow: auto;
         position: fixed; 
-        top: 110px;
+        top: 175px;
         bottom: 85px;
         left: 0px;
         right: 0px;
@@ -113,7 +122,7 @@
         height: 24px;
         padding: 0px;
         margin: 3px;
-        line-height: 24px;
+        /*line-height: 24px;*/
         .circle    
             width: 19px;
             margin: 2px 3px 0px 3px;
@@ -123,3 +132,10 @@
         .ranking
             font-size: 1rem;
             margin: 0 5px 0 5px;
+        .max-size
+            min-width: 50px;
+            max-width: 50px;
+            object-fit: contain;
+.middle
+    margin-top: auto !important;
+    margin-bottom: auto !important;

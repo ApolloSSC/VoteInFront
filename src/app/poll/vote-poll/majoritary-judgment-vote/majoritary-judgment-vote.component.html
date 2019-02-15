@@ -20,7 +20,7 @@
                         data-stopPropagation="true" 
                           [ngClass]="getChoixClass(getChoixForPropositon(option))" 
                           [attr.data-activates]="'dropdown-'+option.Id">
-                        {{getChoixForPropositon(option)?(getChoixForPropositon(option).Name | translate): ("Shared.Voter" | translate)}}
+                        {{getChoixForPropositon(option)?(getChoixForPropositon(option).Name | translate): ('Shared.Voter' | translate)}}
                       </a>
                       <ul [id]="'dropdown-'+option.Id" class='dropdown-content'>
                         <li *ngFor="let c of votingProcess.VotingProcessMode.Choice">
@@ -37,7 +37,7 @@
       </div>
       <div class="collapsible-body no-border left-align">
         <p>{{ option.Description?option.Description:('Shared.NoDescription' | translate) }}</p>
-        <img *ngIf="proposition.Photo != null && proposition.Photo != ''" [src]="proposition.Photo" height="150"/>
+        <img *ngIf="option.Photo != null && option.Photo != ''" [src]="option.Photo" height="150"/>
 
       </div>
     </li>

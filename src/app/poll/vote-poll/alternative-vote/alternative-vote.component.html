@@ -11,8 +11,13 @@
     <div class="card bg-primary-blue">
       <div dragula='left' class="card-content" [attr.content]="'Vote.MoveProposals' | translate" [(dragulaModel)]='propositions' [hidden]="propositions.length == 0">
         <div *ngFor="let proposition of propositions" class="proposition unsorted">
-          <div class="circle" [style.background]="proposition.Color" *ngIf="proposition.Color"></div>
-          <div class="content">{{proposition.Name}}</div>
+          <img *ngIf="proposition.Photo != null && proposition.Photo != ''" [src]="proposition.Photo" class="max-size"/>
+          <div class="circle middle" [style.background]="proposition.Color" *ngIf="proposition.Color"></div>
+          <div class="content middle">
+            {{proposition.Name}}
+            <br/>
+            <span class="description">{{proposition.Description}}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -22,14 +27,16 @@
     <div class="card bg-primary-blue" [ngClass]="{'green white-text': propositions.length == 0}">
       <div dragula='left' class="card-content" [attr.content]="'Vote.MoveProposals' | translate" [ngClass]="{'empty': ranking.length == 0}" [(dragulaModel)]='ranking'>
         <div *ngFor="let proposition of ranking; let i = index" class="proposition">
-          <div class="ranking">
+          <div class="ranking middle">
             {{(i+1)}}
           </div>
-          <div class="circle" [style.background]="proposition.Color" *ngIf="proposition.Color">
-          </div>
-          <div class="content">
-            {{proposition.Name}}
-          </div>
+          <img *ngIf="proposition.Photo != null && proposition.Photo != ''" [src]="proposition.Photo" class="max-size"/>
+          <div class="circle middle" [style.background]="proposition.Color" *ngIf="proposition.Color"></div>
+          <div class="content middle">
+              {{proposition.Name}}
+              <br/>
+              <span class="description">{{proposition.Description}}</span>
+            </div>
         </div>
       </div>
       <div class="card-action" *ngIf="votingProcess && propositions.length > 0">
