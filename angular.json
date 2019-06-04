@@ -20,12 +20,7 @@
               "src/assets",
               "src/favicon.ico",
               {
-                "glob": "index.js",
-                "input": "src/server",
-                "output": "/"
-              },
-              {
-                "glob": "package.json",
+                "glob": "Web.config",
                 "input": "src/server",
                 "output": "/"
               }

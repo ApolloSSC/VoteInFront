@@ -1,4 +1,5 @@
 {
-    "appService.defaultWebAppToDeploy": "/subscriptions/94688289-2312-48c1-a593-04c4a123c503/resourceGroups/ApolloUK/providers/Microsoft.Web/sites/votein",
-    "appService.deploySubpath": "dist"
+    "appService.deploySubpath": "dist",
+    "appService.showBuildDuringDeployPrompt": false,
+    "appService.defaultWebAppToDeploy": "/subscriptions/226f2a34-19d8-4d92-bb38-b30f5ecbada0/resourceGroups/ApolloUK/providers/Microsoft.Web/sites/votein"
 }

@@ -36,8 +36,9 @@
                    type="text" 
                    class="validate"
                    [(ngModel)]="registerModel.UserName"
+                   pattern="[a-zA-Z0-9-]+"
                    name="newname"
-                   required >
+                   required>
             <label for="newname" translate="Login.Username"></label>
           </div>
           <div class="input-field">

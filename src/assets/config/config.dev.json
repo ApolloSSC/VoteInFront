@@ -1,6 +1,0 @@
-{
-    "rootPath": "http://localhost:4200/",
-    "serverPath": "http://localhost:44356/",
-    "defaultLang": "en",
-    "authorizedLanguages": ["en","fr"]
-}

@@ -5,5 +5,9 @@
 
 export const environment = {
   production: false,
-  name: 'dev'
+  name: 'dev',
+  rootPath: "http://localhost:4200/",
+  serverPath: "http://localhost:44356/",
+  defaultLang: "fr",
+  authorizedLanguages: ["en","fr"]
 };

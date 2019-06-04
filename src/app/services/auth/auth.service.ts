@@ -114,13 +114,18 @@ export class AuthService {
       if(error && error.status == 401){
         this.sharedService.errorToast("Identifiants incorrects");
       }
-      else if(error && error._body){
-        let err = JSON.parse(error._body);
-        if(err.length > 0 && err[0].Code == 'DuplicateUserName'){
-          this.sharedService.errorToast("Cet utilisateur existe déjà");
+      else if(error && error.error){
+        let err = error.error;
+        if(err.length > 0){
+          if(err[0].Code == 'DuplicateUserName'){
+            this.sharedService.errorToast("Cet utilisateur existe déjà");
+          }
+          if(err[0].Code == 'InvalidUserName'){
+            this.sharedService.errorToast("Le nom d'utilisateur ne doit contenir que des lettres ou chiffres");
+          }
         }
       }
-      else if (error.json &&  error.json() && error.json().ExceptionMessage) {
+      else if (error.json && error.json() && error.json().ExceptionMessage) {
           this.sharedService.successToast(error.json().ExceptionMessage);
       }
       else {

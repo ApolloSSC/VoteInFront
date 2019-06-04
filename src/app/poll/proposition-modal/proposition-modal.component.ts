@@ -16,7 +16,7 @@ export class PropositionModalComponent implements OnInit {
   @Input() public cssClass: string;
   @Output() public onValidate = new EventEmitter<boolean>();
 
-  private modalActions = new EventEmitter<string|MaterializeAction>();
+  public modalActions = new EventEmitter<string|MaterializeAction>();
   public error: string;
 
   constructor(public translate: TranslateService) { }

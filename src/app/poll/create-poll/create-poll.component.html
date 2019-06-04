@@ -64,12 +64,12 @@
                                         type="email"
                                         [(ngModel)]="poll.MailAuthor" 
                                         name="mailAuthor"
-                                        #mailAuteur="ngModel"
+                                        #mailAuthor="ngModel"
                                         email
                                         required>
                                   <label for="mailAuthor" translate="PollCreate.YourEmail"></label>
                                 </div>
-                                <div *ngIf="poll.MailAuthor && mailAuthor.errors">
+                                <div *ngIf="poll.MailAuthor && mailAuthor && mailAuthor.errors">
                                     <div [hidden]="!mailAuthor.errors.email"
                                           class="red-text" translate="Shared.MailNotValid">
                                     </div>

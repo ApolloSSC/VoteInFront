@@ -63,7 +63,7 @@ export class VotePollComponent implements OnInit {
           res => {
             this.votingProcess = Object.assign(new VotingProcess(), res);
 
-            const guidLS = localStorage.getItem('votingProcess' + res.Guid.toString());
+            const guidLS = localStorage.getItem('scrutin' + res.Guid.toString());
             const guidAVote = localStorage.getItem('avote-scrutin-' + res.Guid.toString());
             this.isAuthor = false;
             // check auteur

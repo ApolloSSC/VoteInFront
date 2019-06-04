@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { AlternativeScoreVote, OptionsModel } from '../../../model/model';
+import { AlternativeScoreVote, OptionsModel, AlternativeVoteResultat } from '../../../model/model';
 
 @Component({
   selector: 'app-result-vote-alternatif',
@@ -9,7 +9,7 @@ import { AlternativeScoreVote, OptionsModel } from '../../../model/model';
 })
 export class ResultVoteAlternatifComponent implements OnInit {
 
-  @Input() Resultat: AlternativeScoreVote;
+  @Input() Resultat: AlternativeVoteResultat;
 
   options = new Array<OptionsModel>();
 

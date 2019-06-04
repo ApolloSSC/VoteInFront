@@ -75,12 +75,12 @@ export class CreatePollComponent implements OnInit {
   onSubmit(f: NgForm) {
     if (f.valid) {
       // RVI: disable Modal for V1
-      this.sendScrutin(this.encrypt.getPrivateKeyB64());
+      this.sendVotingProcess(this.encrypt.getPrivateKeyB64());
       // this.openModalRSA();
     }
   }
 
-  sendScrutin(privateKey ?: string) {
+  sendVotingProcess(privateKey ?: string) {
     // Set date ouverture
     this.poll.OpeningDate = new Date();
     this.poll.PublicKey = this.encrypt.getPublicKeyB64();
