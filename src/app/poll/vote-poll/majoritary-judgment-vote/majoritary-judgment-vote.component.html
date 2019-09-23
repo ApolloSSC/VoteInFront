@@ -20,7 +20,7 @@
                         data-stopPropagation="true" 
                           [ngClass]="getChoixClass(getChoixForPropositon(option))" 
                           [attr.data-activates]="'dropdown-'+option.Id">
-                        {{getChoixForPropositon(option)?(getChoixForPropositon(option).Name | translate): ('Shared.Voter' | translate)}}
+                        {{getChoixForPropositon(option)?(getChoixForPropositon(option).Name | translate): ('Shared.Vote' | translate)}}
                       </a>
                       <ul [id]="'dropdown-'+option.Id" class='dropdown-content'>
                         <li *ngFor="let c of votingProcess.VotingProcessMode.Choice">
