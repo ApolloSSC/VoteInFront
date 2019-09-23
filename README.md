@@ -1,6 +1,7 @@
 # VoteIn
 
 Vote In est un projet permettant de proposer la création de sondages en suivant différents modes de scrutins tels que : le vote alternatif, le scrutin de condorcet...
+
 VoteIn is a project allowing the creation of polls using different polls mode as : Instant-runoff voting, condorcet method...
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.3.2.
