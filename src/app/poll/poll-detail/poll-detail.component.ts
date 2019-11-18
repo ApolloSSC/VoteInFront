@@ -41,7 +41,7 @@ export class PollDetailComponent implements OnInit {
     this.isClosed = (this.votingProcess.ClosingDate != null);
 
     this.hubConnection.on('VoteAdded' + this.votingProcess.Guid, () => { this.votingProcess.NbVotes = this.votingProcess.NbVotes + 1; });
-    this.hubConnection.start().catch(err => document.write(err));
+    this.hubConnection.start().catch(err => console.log(err));
   }
 
   openModalSuppression() {

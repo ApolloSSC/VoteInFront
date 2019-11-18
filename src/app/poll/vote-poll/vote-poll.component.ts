@@ -54,7 +54,7 @@ export class VotePollComponent implements OnInit {
   ngOnInit() {
     this.currentUrl = window.location.href;
 
-    this.hubConnection.start().catch(err => document.write(err));
+    this.hubConnection.start().catch(err => console.log(err));
 
     this.activatedRoute.params.subscribe((params: Params) => {
       this.pollGuid = params['guid'];

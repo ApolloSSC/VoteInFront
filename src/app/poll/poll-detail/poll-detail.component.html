@@ -63,7 +63,7 @@
               <ng-container *ngIf="isOpened">
                 <a class="waves-effect waves-teal btn-flat" [routerLink]="votingProcess.Guid" *ngIf="!isSingle">
                     <i class="material-icons left">mail_outline</i>
-                    <span translate="PollList.GoToVote"></span>>
+                    <span translate="PollList.GoToVote"></span>
                 </a>
                 <button *ngIf="!isClosed" class="waves-effect waves-teal btn" (click)="openModalCloture()" [disabled]="votingProcess.NbVotes==0">
                     <i class="material-icons left">check</i>
